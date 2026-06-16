@@ -777,7 +777,9 @@ SQLite (DBMS_05) and PostgreSQL (this exercise) are both relational databases,
 but they operate very differently. Name two concrete differences you experienced
 in this exercise — in terms of setup, access control, or SQL behaviour.
 
-> *Your answer:*
+> 1) PostgreSQL requires a running background server and network connection, while SQLite is just a single local file. 
+> 2) PostgreSQL uses strict user roles and passwords for access control, 
+> whereas SQLite just gives full access to anyone who can open the file
 
 **Question B – COPY vs. INSERT:**  
 You inserted the `buch` and `exemplar` rows one at a time, and the `ausleihe`
@@ -785,21 +787,26 @@ rows via `COPY`. For a real import of 50,000 rows, which approach would you
 choose and why? What is the main operational cost of individual `INSERT`
 statements at scale?
 
-> *Your answer:*
+> I would absolutely choose COPY. The main operational cost of individual INSERT statements is that the database has to process,
+> execute, and write a separate transaction to the hard drive for every single row, which is incredibly slow at scale. COPY does it all at once.
 
 **Question C – Role model:**  
 You created a dedicated role with `LOGIN` and a password. The `postgres`
 superuser also exists. What is the security principle behind creating a
 separate role instead of always connecting as `postgres`?
 
-> *Your answer:*
+> The Principle of Least Privilege. If your specific user account or application gets hacked,
+> the attacker only compromises that one database.
+> If you use the postgres superuser, they would gain control of the entire server and every database on it.
+
 
 **Question D – Script-driven setup:**  
 The `kino.sql` script creates the schema and inserts data in one run. What
 is the advantage of this approach over typing the statements interactively?
 Name one situation where an interactive approach is still preferable.
 
-> *Your answer:*
+> Scripts allow you to save, share, and instantly reproduce an entire database setup without making any typos.
+> The interactive approach is really only better when you are actively debugging a broken query or exploring unfamiliar data for the first time.
 
 ---
 
