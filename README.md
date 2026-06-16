@@ -681,7 +681,8 @@ psql -U <your-username> -d kino -f kino.sql
 
 > **Screenshot 8:** Take a screenshot showing the script execution output.
 >
-> `[insert screenshot]`
+> <img width="720" height="245" alt="image" src="https://github.com/user-attachments/assets/261ac048-ad03-41ff-b369-60b828a7427f" />
+
 
 ---
 
@@ -734,7 +735,9 @@ ORDER BY reservierungen DESC;
 > **Screenshot 9:** Take a screenshot showing the output of all three
 > `SELECT` statements.
 >
-> `[insert screenshot]`
+> <img width="935" height="882" alt="image" src="https://github.com/user-attachments/assets/8e6f3741-0183-40b4-a576-585562399061" />
+
+
 
 ### Questions for Section 9
 
@@ -742,19 +745,22 @@ ORDER BY reservierungen DESC;
 constraint. What does this prevent, and at which level is this constraint
 enforced — application or database?
 
-> *Your answer:*
+> It prevents double-booking (two people reserving the exact same seat for the exact same show).
+> This is strictly enforced at the database level, meaning it protects the data even if the application code has a bug.
 
 **Question 9.2:** The third query uses `LEFT JOIN` between `vorstellung` and
 `reservierung`. What would be different about the result if you used `JOIN`
 (inner join) instead? Which films would disappear from the result and why?
 
-> *Your answer:*
+> An INNER JOIN only includes rows where there is a direct match in both tables. If a film had zero reservations,
+> it would completely disappear from the results instead of showing a ZERO
 
 **Question 9.3:** `ON DELETE CASCADE` was chosen for `reservierung.vorstellung_id`,
 but `ON DELETE RESTRICT` for `vorstellung.film_id`. Justify both choices in
 terms of the domain.
 
-> *Your answer:*
+> CASCADE: If a screening is cancelled and deleted, all seat reservations for that specific show are automatically deleted too.
+> RESTRICT: You are blocked from deleting a movie out of the system if there are still upcoming screenings scheduled for it.
 
 Exit `psql`:
 
