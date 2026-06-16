@@ -239,7 +239,8 @@ Inspect the structure of one table:
 > **Screenshot 4:** Take a screenshot showing the output of `\dt` and
 > `\d ausleihe`.
 >
-> `[insert screenshot]`
+><img width="1919" height="954" alt="image" src="https://github.com/user-attachments/assets/e671d4c3-4fc5-40d4-86b8-20ff0eab6fd4" />
+
 
 ### Questions for Section 4
 
@@ -247,19 +248,22 @@ Inspect the structure of one table:
 and `mitglied` before `ausleihe`. Why does this order matter? What error would
 PostgreSQL report if you tried to create `ausleihe` first?
 
-> *Your answer:*
+> Order matters due to foreign keys. A parent table must exist before a child table can reference it.
+> If you create ausleihe first, PostgreSQL throws the error: relation "exemplar" does not exist.
 
 **Question 4.2:** The `mitglied_id` and `ausleihe_id` columns use
 `GENERATED ALWAYS AS IDENTITY`. What does this mean? What happens if you try to
 supply a value explicitly with `INSERT INTO mitglied (mitglied_id, ...) VALUES (5, ...)`?
 
-> *Your answer:*
+> It tells the database to automatically generate and manage an auto-incrementing ID.
+> If you try to insert 5 manually, PostgreSQL will block it and throw an error.
 
 **Question 4.3:** `tagesgebuehr` is defined as `NUMERIC(6,2)` while a simpler
 `REAL` would also hold decimal numbers. Give a concrete example of an arithmetic
 result that would differ between the two types when calculating a lending fee.
 
-> *Your answer:*
+> REAL uses floating-point math, which causes small rounding errors (e.g., 0.10 + 0.20 might equal 0.30000001).
+>  NUMERIC(6,2) calculates exact decimal values, which is mandatory for money to avoid losing cents.
 
 ---
 
