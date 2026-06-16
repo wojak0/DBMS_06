@@ -434,7 +434,8 @@ SELECT * FROM ausleihe;
 
 > **Screenshot 6:** Take a screenshot showing the full output of `SELECT * FROM ausleihe`.
 >
-> `[insert screenshot]`
+> <img width="1192" height="586" alt="image" src="https://github.com/user-attachments/assets/3440cd8d-a9f5-4278-9693-b8204cb3269e" />
+
 
 ### Questions for Section 6
 
@@ -442,19 +443,21 @@ SELECT * FROM ausleihe;
 filesystem. What is the difference between server-side `COPY` and a
 client-side import? In which scenario would you need the client-side variant?
 
-> *Your answer:*
+> COPY looks for the file directly on the database server itself, while a client-side import uploads the file from your local machine.
+> You have to use the client-side version when the CSV file is saved on your personal laptop instead of the university's server.
 
 **Question 6.2:** The `NULL ''` option maps empty CSV fields to `NULL`.
 What would happen without this option if the `rueckgabe_datum` field is empty?
 
-> *Your answer:*
+> If we leave that option out, PostgreSQL will try to read the empty space as a blank piece of text instead of recognizing that the value is just missing. > Because the return date column is strictly expecting a real date, the database will throw a syntax error and fail the import.
 
 **Question 6.3:** `ausleihe_id` is `GENERATED ALWAYS AS IDENTITY` and was not
 included in the CSV or the `COPY` column list. How does PostgreSQL handle the
 missing value? What would happen if you tried to include `ausleihe_id` in the
 `COPY` column list with explicit values?
 
-> *Your answer:*
+> Because we set that column to auto-generate, PostgreSQL just takes over and automatically assigns the next available ID numbers in the background.
+> If we tried to force our own specific IDs in the file, the database would actually block the import and throw an error to protect its sequence.
 
 ---
 
