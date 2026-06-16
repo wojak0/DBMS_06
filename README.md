@@ -494,6 +494,8 @@ ORDER BY tage_ausgeliehen DESC;
 
 > *Describe the result: how many open loans are there, and which member has
 > held a book the longest?*
+> There are exactly 2 open loans. Lea Hartmann has held a book the longest
+> 
 
 ---
 
@@ -515,6 +517,7 @@ ORDER BY ausleihen_gesamt DESC;
 
 > *Which member has the most loans? What does `FILTER (WHERE ...)` do here
 > compared to a `CASE WHEN` expression?*
+> Jonas Berger has the most loans (2). FILTER is just a shorter, cleaner way to write a CASE WHEN condition.
 
 ---
 
@@ -537,11 +540,17 @@ WHERE  NOT EXISTS (
 
 > *Which books appear in the result? Verify the result manually against the
 > data you entered.*
+> Only 'Das Parfum'. Verified manually: we never checked out copy 5.
+
+
+
+
 
 > **Screenshot 7:** Take a screenshot showing the output of all three queries
 > in sequence in the `psql` shell.
 >
-> `[insert screenshot]`
+> <img width="975" height="779" alt="image" src="https://github.com/user-attachments/assets/dcc35bd0-2f5b-4071-8111-7e683f1525d9" />
+
 
 ### Questions for Section 7
 
@@ -549,19 +558,27 @@ WHERE  NOT EXISTS (
 performed to always produce a correct result, and does the join order affect
 correctness or only performance?
 
-> *Your answer:*
+> For standard INNER JOINs, the order does not affect the result at all.
+> It only affects performance, but PostgreSQL's query optimizer automatically figures out the fastest order in the background.
 
 **Question 7.2:** Query 2 groups by `m.mitglied_id` in addition to the name
 columns. Why is grouping by the primary key necessary even though names appear
 unique in the sample data?
 
-> *Your answer:*
+> Names are not guaranteed to be unique (you could easily have two members named "Jonas Berger").
+> Grouping by the primary key guarantees their data is never accidentally combined.
 
 **Question 7.3:** Query 3 uses `NOT EXISTS` with a correlated subquery. Rewrite
 the query using `EXCEPT` and verify that both variants return the same result.
 Write your rewritten query here:
 
 > *Your rewritten query:*
+> SELECT titel, verlag FROM buch
+> EXCEPT
+> SELECT b.titel, b.verlag 
+> FROM buch b
+> JOIN exemplar e ON b.isbn = e.isbn
+> JOIN ausleihe a ON e.exemplar_id = a.exemplar_id;
 
 Exit `psql`:
 
