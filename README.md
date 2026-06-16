@@ -348,7 +348,8 @@ SELECT COUNT(*) FROM mitglied;
 
 > **Screenshot 5:** Take a screenshot showing the three `COUNT(*)` results.
 >
-> `[insert screenshot]`
+> <img width="735" height="593" alt="image" src="https://github.com/user-attachments/assets/29073423-2c8b-4e4f-a115-34a2f63ab46d" />
+
 
 Exit `psql`:
 
