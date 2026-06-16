@@ -57,11 +57,7 @@ ssh <your-username>@<server-ip>
 > **Screenshot 1:** Take a screenshot of your terminal showing a successful
 > SSH login (the welcome banner and your shell prompt) and insert it here.
 >
-> `[insert screenshot]`
-
-### Option B – Your Own Machine
-
-Open a terminal. All subsequent commands run locally — skip the `ssh` step.
+> <img width="1527" height="377" alt="image" src="https://github.com/user-attachments/assets/e6e03250-0554-45da-99ae-d7f9d8fa1260" />
 
 ---
 
@@ -80,25 +76,10 @@ psql --version
 > `pg_isready` should print something like
 > `/var/run/postgresql:5432 - accepting connections`.
 
-### Option B – Your Own Machine
-
-If you are working on your own Debian-based system, install PostgreSQL first:
-
-```bash
-sudo apt-get update
-sudo apt-get install -y postgresql postgresql-client
-```
-
-Then verify:
-
-```bash
-pg_isready
-psql --version
-```
-
 > **Screenshot 2:** Take a screenshot showing the output of both commands.
 >
-> `[insert screenshot]`
+> <img width="811" height="136" alt="image" src="https://github.com/user-attachments/assets/8c213313-7145-413e-b5e0-aa3fb4f7f065" />
+
 
 ---
 
@@ -154,7 +135,8 @@ Exit the superuser session:
 > **Screenshot 3:** Take a screenshot showing the `CREATE ROLE`, `CREATE DATABASE`,
 > and both `SELECT` results inside the `postgres=#` session.
 >
-> `[insert screenshot]`
+> <img width="1264" height="666" alt="image" src="https://github.com/user-attachments/assets/97fd5344-3359-4284-b0bb-34e0628ed540" />
+
 
 ---
 
@@ -175,6 +157,7 @@ bibliothek=>
 
 > From this point on, every `psql` session in this exercise connects with
 > `psql -U <your-username> -d bibliothek` unless stated otherwise.
+><img width="781" height="181" alt="image" src="https://github.com/user-attachments/assets/805bcfc7-2d71-403a-85b6-376940ee01fc" />
 
 ---
 
