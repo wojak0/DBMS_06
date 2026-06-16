@@ -574,11 +574,17 @@ Write your rewritten query here:
 
 *Your rewritten query:*
  SELECT titel, verlag FROM buch
+ 
  EXCEPT
+ 
  SELECT b.titel, b.verlag 
+ 
  FROM buch b
+ 
  JOIN exemplar e ON b.isbn = e.isbn
+ 
  JOIN ausleihe a ON e.exemplar_id = a.exemplar_id;
+ 
 
 Exit `psql`:
 
